@@ -70,9 +70,7 @@ def path():
                     Curr_Node[1]=j+Room_Order
                     for k in range(Curr_Node[2]-Room_Order, 0, Bed_Order):
                         Curr_Node[2]=k+Bed_Order
-                        if Prev_Node!=Curr_Node:
-                            print(Curr_Node)
-                            #Prev_Node=Curr_Node
+                        print(Curr_Node)
             Curr_Wing=Next_Wing
 ##            node='Wing_{0}'.format(Next_Wing)
 ##            print(node)
@@ -92,9 +90,7 @@ def path():
                 Curr_Node[1]=j+Room_Order
                 for k in range(Curr_Node[2]-Bed_Order, 0, Bed_Order):
                     Curr_Node[2]=k+Bed_Order
-                    if Prev_Node!=Curr_Node:
-                            print(Curr_Node)
-                            #Prev_Node=Curr_Node
+                    print(Curr_Node)
             Curr_Room=Next_Room        
 ##            node='Wing_{0},Room_{1}'.format(Next_Wing, Next_Room)
 ##            print(node)
@@ -109,15 +105,13 @@ def path():
                 Bed_Order=1
             for k in range(Curr_Node[2]-Bed_Order, Next_Bed, Bed_Order):
                 Curr_Node[2]=k+Bed_Order
-                if Prev_Node!=Curr_Node:
-                            print(Curr_Node)
-                            #Prev_Node=Curr_Node             
+                print(Curr_Node)             
             Curr_Node=[Next_Wing, Next_Room, Next_Bed]
             Curr_Bed=Next_Bed
             node='Wing_{0},Room_{1},Bed_{2}'.format(Next_Wing, Next_Room, Next_Bed)
             print(node)
 
-        #Prev_Node=Curr_Node
+        
             
         
         
