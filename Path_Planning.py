@@ -28,7 +28,7 @@ def input_beds():
         n = input("Enter Bed Number:")
         dest_bed.append(bed_id[n])
     print()
-    print(dest_bed)
+    print('Location of Input Bed:',dest_bed)
     dest_bed.sort()
 input_beds()
 
@@ -42,33 +42,111 @@ def path():
     Curr_Bed=0
     Curr_Node=0
     bed_count=0
+    Curr_Node=[0,0,0]
+    Prev_Node=Curr_Node
     while bed_count!=len(dest_bed):
         
         Next_Wing=dest_bed[bed_count][0]
         Next_Room=dest_bed[bed_count][1]
         Next_Bed=dest_bed[bed_count][2]
-
+        print(Curr_Node)
+        
         if Next_Wing != Curr_Wing:
-            node='Start'
-            print(node)
-            node='Wing_{0}'.format(Next_Wing)
-            print(node)
+            if Curr_Node[0]>Next_Wing:
+                Wing_Order=-1
+            else:
+                Wing_Order=1
+            if Curr_Node[1]>0:
+                Room_Order=-1
+            else:
+                Room_Order=1
+            if Curr_Node[2]>0:
+                Bed_Order=-1
+            else:
+                Bed_Order=1
+            for i in range(Curr_Node[0]-Wing_Order, Next_Wing, Wing_Order):
+                Curr_Node[0]=i+Wing_Order
+                for j in range(Curr_Node[1]-Room_Order, 0, Room_Order):
+                    Curr_Node[1]=j+Room_Order
+                    for k in range(Curr_Node[2]-Room_Order, 0, Bed_Order):
+                        Curr_Node[2]=k+Bed_Order
+                        if Prev_Node!=Curr_Node:
+                            print(Curr_Node)
+                            #Prev_Node=Curr_Node
+            Curr_Wing=Next_Wing
+##            node='Wing_{0}'.format(Next_Wing)
+##            print(node)
+
+
+
         elif Next_Room != Curr_Room:
-            node='Wing_{0},Room_{1}'.format(Next_Wing, Next_Room)
-            print(node)
+            if Curr_Node[1]>Next_Room:
+                Room_Order=-1
+            else:
+                Room_Order=1
+            if Curr_Node[2]>0:
+                Bed_Order=-1
+            else:
+                Bed_Order=1
+            for j in range(Curr_Node[1]-Room_Order, Next_Room, Room_Order):
+                Curr_Node[1]=j+Room_Order
+                for k in range(Curr_Node[2]-Bed_Order, 0, Bed_Order):
+                    Curr_Node[2]=k+Bed_Order
+                    if Prev_Node!=Curr_Node:
+                            print(Curr_Node)
+                            #Prev_Node=Curr_Node
+            Curr_Room=Next_Room        
+##            node='Wing_{0},Room_{1}'.format(Next_Wing, Next_Room)
+##            print(node)
+
+
+            
         else:
-            bed_count=bed_count+1            
-            node1='Wing_{0},Room_{1}'.format(Next_Wing, Next_Room)
-            if node1!=node:
-                print(node1)               
+            bed_count=bed_count+1
+            if Curr_Node[2]>Next_Bed:
+                Bed_Order=-1
+            else:
+                Bed_Order=1
+            for k in range(Curr_Node[2]-Bed_Order, Next_Bed, Bed_Order):
+                Curr_Node[2]=k+Bed_Order
+                if Prev_Node!=Curr_Node:
+                            print(Curr_Node)
+                            #Prev_Node=Curr_Node             
+            Curr_Node=[Next_Wing, Next_Room, Next_Bed]
+            Curr_Bed=Next_Bed
             node='Wing_{0},Room_{1},Bed_{2}'.format(Next_Wing, Next_Room, Next_Bed)
             print(node)
-            node=node1
-        Curr_Wing=Next_Wing
-        Curr_Room=Next_Room
-        Curr_Bed=Next_Bed
+
+        #Prev_Node=Curr_Node
+            
+        
+        
+        
+
+##Return to Start
+    if Curr_Node[0]>0:
+        Wing_Order=-1
+    else:
+        Wing_Order=1
+    if Curr_Node[1]>0:
+        Room_Order=-1
+    else:
+        Room_Order=1
+    if Curr_Node[2]>0:
+        Bed_Order=-1
+    else:
+        Bed_Order=1
+    for i in range(Curr_Node[0]-Wing_Order, 0, Wing_Order):
+        Curr_Node[0]=i+Wing_Order
+        for j in range(Curr_Node[1]-Room_Order, 0, Room_Order):
+            Curr_Node[1]=j+Room_Order
+            for k in range(Curr_Node[2]-Room_Order, 0, Bed_Order):
+                Curr_Node[2]=k+Bed_Order
+                print(Curr_Node)
+
     print("Start")
     print("All requested bed are served")
+##End
 path()
 	
     
