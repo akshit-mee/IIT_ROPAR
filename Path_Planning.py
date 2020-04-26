@@ -49,7 +49,6 @@ def path():
         Next_Wing=dest_bed[bed_count][0]
         Next_Room=dest_bed[bed_count][1]
         Next_Bed=dest_bed[bed_count][2]
-        print(Curr_Node)
         
         if Next_Wing != Curr_Wing:
             if Curr_Node[0]>Next_Wing:
@@ -70,12 +69,8 @@ def path():
                     Curr_Node[1]=j+Room_Order
                     for k in range(Curr_Node[2]-Room_Order, 0, Bed_Order):
                         Curr_Node[2]=k+Bed_Order
-                        if Prev_Node!=Curr_Node:
-                            print(Curr_Node)
-                            #Prev_Node=Curr_Node
+                        print(Curr_Node)
             Curr_Wing=Next_Wing
-##            node='Wing_{0}'.format(Next_Wing)
-##            print(node)
 
 
 
@@ -92,12 +87,8 @@ def path():
                 Curr_Node[1]=j+Room_Order
                 for k in range(Curr_Node[2]-Bed_Order, 0, Bed_Order):
                     Curr_Node[2]=k+Bed_Order
-                    if Prev_Node!=Curr_Node:
-                            print(Curr_Node)
-                            #Prev_Node=Curr_Node
-            Curr_Room=Next_Room        
-##            node='Wing_{0},Room_{1}'.format(Next_Wing, Next_Room)
-##            print(node)
+                    print(Curr_Node)
+            Curr_Room=Next_Room
 
 
             
@@ -109,33 +100,16 @@ def path():
                 Bed_Order=1
             for k in range(Curr_Node[2]-Bed_Order, Next_Bed, Bed_Order):
                 Curr_Node[2]=k+Bed_Order
-                if Prev_Node!=Curr_Node:
-                            print(Curr_Node)
-                            #Prev_Node=Curr_Node             
+                print(Curr_Node)             
             Curr_Node=[Next_Wing, Next_Room, Next_Bed]
             Curr_Bed=Next_Bed
-            node='Wing_{0},Room_{1},Bed_{2}'.format(Next_Wing, Next_Room, Next_Bed)
+            node='Wing_{0},Room_{1},Bed_{2} Reached!'.format(Next_Wing, Next_Room, Next_Bed)
             print(node)
-
-        #Prev_Node=Curr_Node
             
-        
-        
-        
-
 ##Return to Start
-    if Curr_Node[0]>0:
         Wing_Order=-1
-    else:
-        Wing_Order=1
-    if Curr_Node[1]>0:
         Room_Order=-1
-    else:
-        Room_Order=1
-    if Curr_Node[2]>0:
         Bed_Order=-1
-    else:
-        Bed_Order=1
     for i in range(Curr_Node[0]-Wing_Order, 0, Wing_Order):
         Curr_Node[0]=i+Wing_Order
         for j in range(Curr_Node[1]-Room_Order, 0, Room_Order):
@@ -144,7 +118,6 @@ def path():
                 Curr_Node[2]=k+Bed_Order
                 print(Curr_Node)
 
-    print("Start")
     print("All requested bed are served")
 ##End
 path()
