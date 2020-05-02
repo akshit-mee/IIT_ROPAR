@@ -104,9 +104,10 @@ def path():
                 Curr_Node[2]=k+Bed_Order
                 print(Curr_Node)
                 calc_path.append(Curr_Node[:])
-            calc_path.append('Pause')
+            calc_path.append(['Pause'])
             Curr_Node=[Next_Wing, Next_Room, Next_Bed]
             Curr_Bed=Next_Bed
+            
             node='Wing_{0},Room_{1},Bed_{2} Reached!'.format(Next_Wing, Next_Room, Next_Bed)
             print(node)
         ##_____________________________________________________________________________##            
@@ -132,6 +133,8 @@ input_beds()
 print(dest_bed)
 
 path()
-for i in range(len(calc_path)):
-    print(calc_path[i])
+for i in range(len(calc_path)-2):
+    if calc_path[i]==calc_path[i+1]:
+        calc_path.pop(i)
+
     
