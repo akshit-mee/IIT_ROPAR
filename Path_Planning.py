@@ -2,13 +2,13 @@ dest_bed=list()
 bed_id={}
 calc_path=[[0,0,0]]
 
-####################################################################
+############################################################################
 
 class Bed:
     def __init__(self, Wing, Room, Bed):
         self.node=[Wing, Room, Bed]
 
-####################################################################
+##############################################################################
 
 ## For hospitals bed name would be manually maped
 ## Loop is only for demostration purposes
@@ -28,15 +28,13 @@ def input_beds():
     for i in range(int(number)):
         n = input("Enter Bed Number:")
         dest_bed.append(bed_id[n])
-    print()
-    print('Location of Input Bed:',dest_bed)
+    # print('Location of Input Bed:',dest_bed)
     dest_bed.sort()
 
 #################################################################################
 
 def path():
-    print('\n'*5)
-    print("Listing Node in the respective order")
+
     Curr_Wing=0
     Curr_Room=0
     Curr_Bed=0
@@ -69,7 +67,7 @@ def path():
                     Curr_Node[1]=j+Room_Order
                     for k in range(Curr_Node[2]-Room_Order, 0, Bed_Order):
                         Curr_Node[2]=k+Bed_Order
-                        print(Curr_Node)
+                        # print(Curr_Node)
                         calc_path.append(Curr_Node[:])
             Curr_Wing=Next_Wing
 
@@ -88,7 +86,7 @@ def path():
                 Curr_Node[1]=j+Room_Order
                 for k in range(Curr_Node[2]-Bed_Order, 0, Bed_Order):
                     Curr_Node[2]=k+Bed_Order
-                    print(Curr_Node)
+                    # print(Curr_Node)
                     calc_path.append(Curr_Node[:])
             Curr_Room=Next_Room
 
@@ -102,14 +100,13 @@ def path():
                 Bed_Order=1
             for k in range(Curr_Node[2]-Bed_Order, Next_Bed, Bed_Order):
                 Curr_Node[2]=k+Bed_Order
-                print(Curr_Node)
+                # print(Curr_Node)
                 calc_path.append(Curr_Node[:])
             calc_path.append(['Pause'])
             Curr_Node=[Next_Wing, Next_Room, Next_Bed]
             Curr_Bed=Next_Bed
-            
             node='Wing_{0},Room_{1},Bed_{2} Reached!'.format(Next_Wing, Next_Room, Next_Bed)
-            print(node)
+            # print(node)
         ##_____________________________________________________________________________##            
 
 ##Return to Start
@@ -123,18 +120,22 @@ def path():
             for k in range(Curr_Node[2]-Room_Order, 0, Bed_Order):
                 Curr_Node[2]=k+Bed_Order
                 calc_path.append(Curr_Node[:])
-                print(Curr_Node)
-    print("All requested bed are served")
+                # print(Curr_Node)
+    # print("All requested bed are served")
+    try:
+        for i in range(len(calc_path)-1):
+            if calc_path[i]==calc_path[i+1]:
+                calc_path.pop(i)
+    except IndexError:
+        pass
     
 ################################################################################
 
 
 input_beds()
-print(dest_bed)
-
-path()
-for i in range(len(calc_path)-2):
-    if calc_path[i]==calc_path[i+1]:
-        calc_path.pop(i)
+# print(dest_bed)
+# path()
+# print('now')
+print(calc_path)
 
     
